@@ -14,7 +14,21 @@ pipeline
  {
  steps{
  script{
- sh " ansible-playbook  /var/lib/jenkins/workspace/livraison/ansible/docker.yml -i ansible/hosts.yml "
+ sh " ansible-playbook  /var/lib/jenkins/workspace/cd/Ansible/docker.yml -i ansible/hosts.yml "
+ }
+ }
+ }
+ stage('Docker login') {
+
+                                         steps {
+                                          sh 'echo "login Docker ...."'
+                   	sh "docker login -u amina112 -p 181Jft3007"
+                               }  }
+ stage('docker registry')
+ {
+ steps{
+ script{
+ sh " ansible-playbook  -vvvv /var/lib/jenkins/workspace/cd/Ansible/docker-registry.yml -i ansible/hosts.yml "
  }
  }
  }
